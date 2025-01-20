@@ -1,0 +1,27 @@
+{
+  "name": "pokemons_handler",
+  "type": "module",
+  "version": "1.0.0",
+  "description": "An awesome API rest to handle some pokemons",
+  "author": "Yaya",
+  "license": "ISC",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon index.js",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix"
+  },
+  "dependencies": {
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2"
+  },
+  "devDependencies": {
+    "@antfu/eslint-config": "^3.14.0",
+    "@eslint-react/eslint-plugin": "^1.23.2",
+    "eslint": "^9.18.0",
+    "eslint-plugin-format": "^1.0.1",
+    "eslint-plugin-react-hooks": "^5.1.0",
+    "eslint-plugin-react-refresh": "^0.4.18",
+    "nodemon": "^3.1.9"
+  }
+}
