@@ -1,6 +1,7 @@
 import express from 'express';
+import { errorHandler } from './middlewares/errorHandler.js';
 import router from './routers/index.js';
-import './helpers/env.load.js';
+import '../config/env.js';
 
 const app = express();
 
@@ -11,5 +12,8 @@ app.get('/', (req, res) => {
 
 // start the router
 app.use(router);
+
+// Middleware global pour la gestion des erreurs
+app.use(errorHandler);
 
 export default app;

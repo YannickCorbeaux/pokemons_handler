@@ -1,12 +1,4 @@
-import { promises as fs } from 'node:fs';
-import path from 'node:path';
-
-const jsonFilePath = path.resolve('app/data/pokemons.json');
-
-async function readPokemonsFromJson() {
-  const data = await fs.readFile(jsonFilePath, 'utf-8');
-  return JSON.parse(data);
-}
+import { readPokemonsFromJson } from '../../config/data.js';
 
 const pokemonsDataMapper = {
   async getAllPokemons() {
