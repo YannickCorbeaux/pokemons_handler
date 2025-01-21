@@ -1,21 +1,37 @@
 import pokemonsDataMapper from '../dataMapper/pokemonsDataMapper.js';
 
-// function to get all Pokemons from my json (no db at this time)
+/**
+ * Get all Pokemons from the JSON file (no database at this time).
+ * @async
+ * @function getAllPokemons
+ * @memberof module:pokemonsController
+ * @param {import('express').Request} req - The Express request object.
+ * @param {import('express').Response} res - The Express response object.
+ * @returns {Promise<void>} A promise that resolves when the response is sent.
+ */
 export async function getAllPokemons(req, res) {
   const pokemons = await pokemonsDataMapper.getAllPokemons();
-  // send a json with a message contains number of pokemons and the list of their pokemons
+  // Send a JSON response with a message containing the number of Pokemons and the list of their Pokemons
   res.json({
     message: `Il y a ${pokemons.length} pokemons dans le pokedex, les voici : `,
     data: pokemons,
   });
 }
 
-// function to get one Pokemon by id
+/**
+ * Get one Pokemon by ID.
+ * @async
+ * @function getOnePokemon
+ * @memberof module:pokemonsController
+ * @param {import('express').Request} req - The Express request object.
+ * @param {import('express').Response} res - The Express response object.
+ * @returns {Promise<void>} A promise that resolves when the response is sent.
+ */
 export async function getOnePokemon(req, res) {
   try {
-    // Use validate id from the middleware
+    // Use validated ID from the middleware
     const pokemonId = req.pokemonId;
-    // Get the pokemon by id
+    // Get the Pokemon by ID
     const pokemon = await pokemonsDataMapper.getOnePokemon(pokemonId);
     if (pokemon) {
       res.send(`
