@@ -18,7 +18,14 @@ export async function getOnePokemon(req, res) {
     // Get the pokemon by id
     const pokemon = await pokemonsDataMapper.getOnePokemon(pokemonId);
     if (pokemon) {
-      res.send(`Tu as sélectionné le pokémon ${pokemon.name}, son id est le ${pokemon.id}, il a ${pokemon.hp} points de vie et ${pokemon.cp} points de caractéristiques, enfin il est de type ${pokemon.types[0]}${pokemon.types[1] ? ` et ${pokemon.types[1]}` : ''}.<br>Voici à quoi il ressemble : <br><img src="${pokemon.picture}" alt="${pokemon.name}"><br> Magnifique n'est-ce pas ? 💩`);
+      res.send(`
+        Tu as sélectionné le pokémon ${pokemon.name}, son id est le ${pokemon.id}, 
+        il a ${pokemon.hp} points de vie et ${pokemon.cp} points de caractéristiques, 
+        enfin il est de type ${pokemon.types[0]}${pokemon.types[1] ? ` et ${pokemon.types[1]}` : ''}.
+        <br>Voici à quoi il ressemble : 
+        <br><img src="${pokemon.picture}" alt="${pokemon.name}">
+        <br> Magnifique n'est-ce pas ? 💩
+      `);
       // res.json({
       //   message: `Tu as sélectionné le pokémon ${pokemon.name}, voici ses données :`,
       //   data: pokemon,
