@@ -4,11 +4,12 @@ import './helpers/env.load.js';
 
 const app = express();
 
+// Just to test the server
 app.get('/', (req, res) => {
   res.send('Hello Express 👽');
 });
 
-// on lance le router
+// start the router
 app.use(router);
 
 export default app;

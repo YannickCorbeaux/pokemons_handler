@@ -1,14 +1,25 @@
-// import app from '../app/index.js';
+import pokemonsDataMapper from '../dataMapper/pokemonsDataMapper.js';
 
-// app.get('/api/pokemons/1', (req, res) => res.send('Hello, Bulbasaur 🌱'));
-
-// export async function getAllPokemons(req, res) {
-//   const pokemons = req.params;
-//   res.send(`Hello, ${pokemons} 🐉`);
-// }
+// function to get all Pokemons from my json (no db at this time)
+export async function getAllPokemons(req, res) {
+  const pokemons = await pokemonsDataMapper.getAllPokemons();
+  res.json(pokemons);
+}
 
 // function to get one Pokemon by id
-export function getOnePokemon(req, res) {
-  const pokemonId = Number.parseInt(req.params.id);
-  res.send(`Hello, vous avez demandé le pokemon numéro ${pokemonId} 🐉`);
+export async function getOnePokemon(req, res) {
+  try {
+    const pokemonId = req.pokemonId; // Use validate id from the middleware
+    const pokemon = await pokemonsDataMapper.getOnePokemon(pokemonId);
+    if (pokemon) {
+      res.json(pokemon);
+    }
+    else {
+      res.status(404).send('Pokemon not found');
+    }
+  }
+  catch (error) {
+    console.error('Error in getOnePokemon', error);
+    res.status(500).send('Internal Server Error');
+  }
 }
