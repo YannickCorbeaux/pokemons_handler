@@ -1,6 +1,6 @@
 import express from 'express';
 import * as pokemonsController from '../../controllers/pokemonsController.js';
-import { validateId } from '../../middlewares/validateId.js';
+import { validateId } from '../middlewares/validateId.js';
 
 const apiPokemons = express.Router();
 
