@@ -1,3 +1,4 @@
+import success from '../../helpers/helpers.js';
 import pokemonsDataMapper from '../dataMapper/pokemonsDataMapper.js';
 
 /**
@@ -11,11 +12,9 @@ import pokemonsDataMapper from '../dataMapper/pokemonsDataMapper.js';
  */
 export async function getAllPokemons(req, res) {
   const pokemons = await pokemonsDataMapper.getAllPokemons();
+  const message = `Il y a ${pokemons.length} pokemons dans le pokedex, les voici : `;
   // Send a JSON response with a message containing the number of Pokemons and the list of their Pokemons
-  res.json({
-    message: `Il y a ${pokemons.length} pokemons dans le pokedex, les voici : `,
-    data: pokemons,
-  });
+  res.status(200).json(success(message, pokemons));
 }
 
 /**
@@ -26,6 +25,8 @@ export async function getAllPokemons(req, res) {
  * @param {import('express').Request} req - The Express request object.
  * @param {import('express').Response} res - The Express response object.
  * @returns {Promise<void>} A promise that resolves when the response is sent.
+ * @throws {TypeError} If the ID is not a valid number.
+ * @throws {Error} If the Pokémon is not found.
  */
 export async function getOnePokemon(req, res) {
   try {
@@ -33,19 +34,10 @@ export async function getOnePokemon(req, res) {
     const pokemonId = req.pokemonId;
     // Get the Pokemon by ID
     const pokemon = await pokemonsDataMapper.getOnePokemon(pokemonId);
+    // Answer message if success
+    const message = `Tu as sélectionné le pokémon ${pokemon.name}, voici ses données :`;
     if (pokemon) {
-      res.send(`
-        Tu as sélectionné le pokémon ${pokemon.name}, son id est le ${pokemon.id}, 
-        il a ${pokemon.hp} points de vie et ${pokemon.cp} points de caractéristiques, 
-        enfin il est de type ${pokemon.types[0]}${pokemon.types[1] ? ` et ${pokemon.types[1]}` : ''}.
-        <br>Voici à quoi il ressemble : 
-        <br><img src="${pokemon.picture}" alt="${pokemon.name}">
-        <br> Magnifique n'est-ce pas ? 💩
-      `);
-      // res.json({
-      //   message: `Tu as sélectionné le pokémon ${pokemon.name}, voici ses données :`,
-      //   data: pokemon,
-      // });
+      res.status(200).json(success(message, pokemon));
     }
     else {
       res.status(404).send('Pokemon not found');

@@ -1,4 +1,4 @@
-import { readPokemonsFromJson } from '../../config/data.js';
+import { readPokemonsFromJson } from '../../services/data.js';
 
 /**
  * Data mapper for Pokémon data.
