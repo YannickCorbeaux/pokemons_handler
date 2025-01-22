@@ -1,5 +1,6 @@
 import express from 'express';
-import { errorHandler } from './middlewares/errorHandler.js';
+import morgan from 'morgan';
+import errorHandler from './middlewares/errorHandler.js';
 import router from './routers/index.js';
 import '../config/env.js';
 
@@ -8,6 +9,26 @@ import '../config/env.js';
  * @type {import('express').Application}
  */
 const app = express();
+
+/**
+ * Use the morgan middleware for logging requests.
+ * @name use/morgan
+ * @function
+ * @memberof module:app
+ * @inner
+ * @param {import('express').RequestHandler} morgan - The morgan middleware.
+ */
+app.use(morgan('dev'))
+
+/**
+ * Serve static files from the 'public' directory.
+ * @name use/static
+ * @function
+ * @memberof module:app
+ * @inner
+ * @param {string} path - The path to the static files directory.
+ */
+  .use(express.static('public'));
 
 /**
  * Test route to verify the server is running.
@@ -30,7 +51,7 @@ app.get('/', (req, res) => {
  * @inner
  * @param {import('express').Router} router - The main router for the application.
  */
-app.use(router);
+app.use(router)
 
 /**
  * Global error handling middleware.
@@ -40,6 +61,6 @@ app.use(router);
  * @inner
  * @param {import('express').ErrorRequestHandler} errorHandler - The error handling middleware.
  */
-app.use(errorHandler);
+  .use(errorHandler);
 
 export default app;

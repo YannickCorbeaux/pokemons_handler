@@ -5,7 +5,7 @@
  * @param {import('express').Response} res - The Express response object.
  * @param {import('express').NextFunction} _next - The next middleware function (unused).
  */
-export function errorHandler(err, req, res, _next) {
+export default function errorHandler(err, req, res, _next) {
   console.error(err.stack);
   res.status(500).send('Something broke!');
 }
