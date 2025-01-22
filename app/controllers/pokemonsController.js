@@ -1,4 +1,4 @@
-import success from '../../helpers/helpers.js';
+import success from '../../helpers/succesHelper.js';
 import pokemonsDataMapper from '../dataMapper/pokemonsDataMapper.js';
 
 /**
