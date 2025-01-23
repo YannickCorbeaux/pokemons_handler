@@ -22,7 +22,7 @@ class PokemonsController {
       const pokemons = await prisma.pokemon.findMany();
       // const message = `There are ${pokemons.length} pokemons in the pokedex, here they are: `;
       // res.status(200).json(success(message, pokemons));
-      // ! WARN - Do not use this in production, it's vulnerable to XSS attacks // it's just for fun because no front at this time the good method is above ----------------------------------
+      // ! WARN - Do not use this in production, it's vulnerable to XSS attacks // it's just for fun because no front at this time the good method is above just comment this & uncomment 2 lines above----------------------------------
       const message = PokemonHtmlGenerator.generateAllPokemonsHtml(pokemons);
       res.status(200).send(message);
       // ! -----------------------------------------------------------------
@@ -54,7 +54,7 @@ class PokemonsController {
       }
       // const message = `You have selected the Pokémon ${pokemon.name}, here are its details:`;
       // res.status(200).json(success(message, pokemon));
-      // ! WARN - Do not use this in production, it's vulnerable to XSS attacks // it's just for fun because no front at this time the good method is above----------------------------------
+      // ! WARN - Do not use this in production, it's vulnerable to XSS attacks // it's just for fun because no front at this time the good method is above just comment this & uncomment 2 lines above----------------------------------
       const message = PokemonHtmlGenerator.generatePokemonHtml(pokemon);
       res.status(200).send(message);
       // ! ----------------------------------------------------------------
@@ -82,7 +82,7 @@ class PokemonsController {
       });
       // const message = `The Pokémon ${newPokemon.name} has been successfully added.`;
       // res.status(201).json(success(message, newPokemon));
-      // ! WARN - Do not use this in production, it's vulnerable to XSS attacks // it's just for fun because no front at this time the good method is above-----------------------------------
+      // ! WARN - Do not use this in production, it's vulnerable to XSS attacks // it's just for fun because no front at this time the good method is above  just comment this & uncomment 2 lines above-----------------------------------
       const message = PokemonHtmlGenerator.generatePokemonCreatedHtml(newPokemon);
       res.status(201).send(message);
       // ! -----------------------------------------------------------------
