@@ -18,7 +18,27 @@ const app = express();
  * @inner
  * @param {import('express').RequestHandler} morgan - The morgan middleware.
  */
-app.use(morgan('dev'))
+app.use(morgan('dev'));
+
+/**
+ * Use the express.json middleware to parse JSON bodies.
+ * @name use/json
+ * @function
+ * @memberof module:app
+ * @inner
+ * @param {import('express').RequestHandler} express.json - The express.json middleware.
+ */
+app.use(express.json());
+
+/**
+ * Use the express.urlencoded middleware to parse URL-encoded bodies.
+ * @name use/urlencoded
+ * @function
+ * @memberof module:app
+ * @inner
+ * @param {import('express').RequestHandler} express.urlencoded - The express.urlencoded middleware.
+ */
+app.use(express.urlencoded({ extended: true }));
 
 /**
  * Serve static files from the 'public' directory.
@@ -28,10 +48,10 @@ app.use(morgan('dev'))
  * @inner
  * @param {string} path - The path to the static files directory.
  */
-  .use(express.static('public'));
+app.use(express.static('public'));
 
 /**
- * Test route to verify the server is running.
+ * Base route to verify the server is running.
  * @name get/
  * @function
  * @memberof module:app
@@ -51,7 +71,7 @@ app.get('/', (req, res) => {
  * @inner
  * @param {import('express').Router} router - The main router for the application.
  */
-app.use(router)
+app.use(router);
 
 /**
  * Global error handling middleware.
@@ -61,6 +81,6 @@ app.use(router)
  * @inner
  * @param {import('express').ErrorRequestHandler} errorHandler - The error handling middleware.
  */
-  .use(errorHandler);
+app.use(errorHandler);
 
 export default app;

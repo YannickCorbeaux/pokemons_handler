@@ -1,17 +1,16 @@
-import { readPokemonsFromJson } from '../../services/data.js';
+import pokemonDataService from '../../services/data.js';
 
 /**
- * Data mapper for Pokémon data.
- * @namespace pokemonsDataMapper
+ * Class representing the data mapper for Pokémon data.
  */
-const pokemonsDataMapper = {
+class PokemonsDataMapper {
   /**
    * Get all Pokémon from the JSON file.
    * @returns {Promise<object[]>} A promise that resolves to an array of Pokémon objects.
    */
   async getAllPokemons() {
-    return await readPokemonsFromJson();
-  },
+    return await pokemonDataService.readPokemonsFromJson();
+  }
 
   /**
    * Get a single Pokémon by ID.
@@ -22,16 +21,12 @@ const pokemonsDataMapper = {
    */
   async getOnePokemon(id) {
     try {
-      // Entry validation
       const pokemonId = Number.parseInt(id);
       if (Number.isNaN(pokemonId)) {
         throw new TypeError('Invalid ID');
       }
 
-      // Read data from the JSON file
-      const pokemons = await readPokemonsFromJson();
-
-      // Find the Pokémon by ID
+      const pokemons = await pokemonDataService.readPokemonsFromJson();
       const pokemon = pokemons.find(poke => poke.id === pokemonId);
 
       if (!pokemon) {
@@ -44,7 +39,24 @@ const pokemonsDataMapper = {
       console.error('Error in getOnePokemon', error);
       throw error;
     }
-  },
-};
+  }
 
-export default pokemonsDataMapper;
+  /**
+   * Add a new Pokémon to the JSON file.
+   * @param {object} newPokemon - The new Pokémon to add.
+   * @returns {Promise<void>} A promise that resolves when the Pokémon is added.
+   */
+  async addPokemon(newPokemon) {
+    try {
+      const pokemons = await pokemonDataService.readPokemonsFromJson();
+      pokemons.push(newPokemon);
+      await pokemonDataService.writePokemonsToJson(pokemons);
+    }
+    catch (error) {
+      console.error('Error in addPokemon', error);
+      throw error;
+    }
+  }
+}
+
+export default new PokemonsDataMapper();

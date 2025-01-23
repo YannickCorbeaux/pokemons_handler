@@ -1,6 +1,7 @@
 import express from 'express';
-import * as pokemonsController from '../../controllers/pokemonsController.js';
+import pokemonsController from '../../controllers/pokemonsController.js';
 import { validateId } from '../middlewares/validateId.js';
+import { validatePokemon } from '../middlewares/validatePokemon.js';
 
 const apiPokemons = express.Router();
 
@@ -14,7 +15,8 @@ const apiPokemons = express.Router();
  * @param {import('express').Response} res - The Express response object.
  */
 apiPokemons.route('/')
-  .get(pokemonsController.getAllPokemons);
+  .get(pokemonsController.getAllPokemons)
+  .post(validatePokemon, pokemonsController.addPokemon);
 
 /**
  * Route to get a single Pokémon by ID.
