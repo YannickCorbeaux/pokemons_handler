@@ -13,7 +13,7 @@ export function validatePokemon(req, res, next) {
     cp: Joi.number().required(),
     picture: Joi.string().uri().required(),
     types: Joi.array().items(Joi.string()).required(),
-    created: Joi.date().iso().required(),
+    created: Joi.date().iso(),
   });
 
   const { error, value } = schema.validate(req.body);
