@@ -9,10 +9,18 @@
  * @param {import('express').NextFunction} next - The next middleware function.
  */
 export function validateId(req, res, next) {
+  // Parse the ID from the request parameters
   const pokemonId = Number.parseInt(req.params.id);
+
+  // Check if the parsed ID is a valid number
   if (Number.isNaN(pokemonId)) {
+    // If the ID is not a valid number, send a 400 Bad Request response
     return res.status(400).send('Invalid ID');
   }
-  req.pokemonId = pokemonId; // Store validated ID in request
+
+  // Store the validated ID in the request object
+  req.pokemonId = pokemonId;
+
+  // Call the next middleware function
   next();
 }

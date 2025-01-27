@@ -6,6 +6,9 @@
  * @param {import('express').NextFunction} _next - The next middleware function (unused).
  */
 export default function errorHandler(err, req, res, _next) {
+  // Log the error stack trace to the console
   console.error(err.stack);
+
+  // Send a 500 Internal Server Error response with a generic message
   res.status(500).send('Something broke!');
 }
